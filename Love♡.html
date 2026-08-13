@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لمريم 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFF2F4;
+    --bg-alt: #FCE1E8;
+    --wine: #C21C5B;
+    --wine-deep: #8E1245;
+    --gold: #DDA15E;
+    --ink: #4A2130;
+    --muted: #A9727E;
+    --paper: #FFFBFB;
+    --dark-bg: #5C0F32;
+    --dark-bg2: #3A0A22;
+    --cream: #FCE3D4;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Tajawal', sans-serif;
+    overflow-x:hidden;
+    line-height:1.8;
+  }
+
+  h1,h2,h3{ font-family:'Aref Ruqaa', serif; font-weight:700; }
+
+  section{
+    position:relative;
+    padding:100px 22px;
+    max-width:720px;
+    margin:0 auto;
+  }
+
+  .section-alt{ background:var(--bg-alt); max-width:none; }
+  .section-alt > .inner{ max-width:720px; margin:0 auto; }
+
+  .divider{
+    text-align:center; color:var(--wine); font-size:18px; letter-spacing:8px;
+    margin-bottom:26px; opacity:0.7;
+  }
+
+  /* ---------- progress bar ---------- */
+  #progress{
+    position:fixed; top:0; right:0; left:0; height:4px;
+    background:linear-gradient(90deg, var(--gold), var(--wine));
+    width:0%; z-index:200; transition:width 0.1s linear;
+  }
+
+  /* ---------- dot nav ---------- */
+  #dotnav{
+    position:fixed; top:50%; left:18px; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:14px; z-index:150;
+  }
+  #dotnav button{
+    width:10px; height:10px; border-radius:50%; background:transparent;
+    border:2px solid rgba(194,28,91,0.35); cursor:pointer; padding:0;
+    transition:background 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  #dotnav button.active{ background:var(--wine); border-color:var(--wine); transform:scale(1.3); }
+  @media (max-width: 640px){ #dotnav{ display:none; } }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- floating ambient hearts ---------- */
+  .floaters{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .floater{
+    position:absolute; bottom:-10%; font-size:22px; opacity:0;
+    animation: rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.55; }
+    90%{ opacity:0.4; }
+    100%{ transform:translateY(-115vh) translateX(var(--drift)) rotate(20deg); opacity:0; }
+  }
+
+  /* soft glow blobs for romantic ambience */
+  .glow{
+    position:absolute; border-radius:50%; filter:blur(60px); z-index:0; pointer-events:none;
+  }
+
+  /* ================= HERO ================= */
+  #hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; max-width:none; padding:40px 22px; position:relative;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(221,161,94,0.20), transparent 42%),
+      radial-gradient(circle at 82% 82%, rgba(194,28,91,0.18), transparent 48%),
+      var(--bg);
+  }
+  #hero > *{ position:relative; z-index:2; }
+  .eyebrow{ font-size:13px; letter-spacing:3px; color:var(--gold); font-weight:700; margin-bottom:14px; }
+  #hero h1{ font-size:clamp(36px, 8vw, 60px); color:var(--wine-deep); margin-bottom:10px; }
+  .hero-sub{ font-family:'Aref Ruqaa',serif; font-size:20px; color:var(--wine); margin-bottom:22px; }
+  #hero p.lead-text{ font-size:16px; color:var(--muted); max-width:440px; margin-bottom:52px; }
+  .scroll-cue{
+    display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--wine);
+    font-size:13px; animation: bob 2.2s ease-in-out infinite;
+  }
+  .scroll-cue svg{ width:16px; height:16px; }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+  .section-label{ font-size:12px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:10px; }
+  .section-title{ font-size:clamp(26px,5vw,38px); color:var(--wine-deep); margin-bottom:18px; }
+  .section-intro{ color:var(--muted); font-size:15px; margin-bottom:44px; max-width:560px; }
+
+  /* ================= TIMELINE ================= */
+  .timeline{ position:relative; padding-right:26px; border-right:2px solid rgba(194,28,91,0.28); }
+  .tl-item{ position:relative; margin-bottom:8px; padding-bottom:26px; }
+  .tl-item::before{
+    content:'♥'; position:absolute; right:-40px; top:-4px; font-size:14px;
+    width:26px; height:26px; border-radius:50%; background:var(--paper);
+    border:2px solid var(--wine); color:var(--wine);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .tl-item button.tl-head{
+    width:100%; text-align:right; background:none; border:none; cursor:pointer;
+    font-family:'Tajawal',sans-serif; padding:0;
+  }
+  .tl-year{ font-size:12px; color:var(--gold); font-weight:700; letter-spacing:1px; }
+  .tl-title{ font-family:'Aref Ruqaa',serif; font-size:21px; color:var(--ink); margin-top:4px; }
+  .tl-body{
+    max-height:0; overflow:hidden; transition:max-height 0.5s ease, margin-top 0.5s ease;
+    color:var(--muted); font-size:14.5px; margin-top:0;
+  }
+  .tl-item.open .tl-body{ max-height:240px; margin-top:12px; }
+  .tl-item button.tl-head:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+  .tl-plus{ float:left; color:var(--wine); font-size:20px; transition:transform 0.3s; }
+  .tl-item.open .tl-plus{ transform:rotate(45deg); }
+
+  /* ================= NOTE JAR ================= */
+  .jar-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(118px,1fr)); gap:13px; margin-bottom:28px; }
+  .note-card{ position:relative; height:118px; perspective:800px; -webkit-perspective:800px; cursor:pointer; }
+  .note-card .face{
+    position:absolute; inset:0; border-radius:10px;
+    backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+    transition:transform 0.6s cubic-bezier(.4,.2,.2,1), -webkit-transform 0.6s cubic-bezier(.4,.2,.2,1);
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:10px;
+  }
+  .note-card .front{
+    background:linear-gradient(160deg, var(--paper), var(--bg-alt));
+    border:1.5px dashed rgba(194,28,91,0.45); color:var(--wine); font-size:13px; font-weight:700;
+    transform:rotateY(0deg); -webkit-transform:rotateY(0deg);
+  }
+  .note-card .back{
+    background:linear-gradient(160deg, var(--wine), var(--wine-deep));
+    color:var(--paper); font-size:12.5px; line-height:1.65;
+    transform:rotateY(180deg); -webkit-transform:rotateY(180deg);
+  }
+  .note-card.flipped .front{ transform:rotateY(-180deg); -webkit-transform:rotateY(-180deg); }
+  .note-card.flipped .back{ transform:rotateY(0deg); -webkit-transform:rotateY(0deg); }
+  .note-card:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:10px; }
+  .note-card:nth-child(4n+2) .front{ border-color:rgba(221,161,94,0.55); color:var(--gold); }
+  .note-card:nth-child(4n+2) .back{ background:linear-gradient(160deg, var(--gold), var(--wine)); }
+  .note-card:nth-child(4n+3) .front{ background:linear-gradient(160deg, var(--paper), var(--wine-deep) 220%); }
+
+  .shuffle-btn{
+    display:block; margin:0 auto; font-family:'Tajawal',sans-serif; font-weight:700;
+    background:none; border:1.5px solid var(--wine); color:var(--wine);
+    padding:10px 24px; border-radius:24px; cursor:pointer; transition:all 0.25s ease;
+  }
+  .shuffle-btn:hover{ background:var(--wine); color:var(--paper); }
+
+  /* ================= CONFESSIONS (dark romantic) ================= */
+  #confess{
+    max-width:none; position:relative; overflow:hidden;
+    background:radial-gradient(ellipse at top, var(--dark-bg2), var(--dark-bg));
+    color:var(--cream); padding:120px 22px;
+  }
+  #confess .inner{ max-width:600px; margin:0 auto; text-align:right; position:relative; z-index:2; }
+  #confess .section-label{ color:var(--gold); }
+  #confess .section-title{ color:var(--cream); }
+  #confess p{ font-size:16.5px; line-height:2.2; min-height:1.4em; color:#F7DCC9; }
+  .cursor{ display:inline-block; width:2px; background:var(--gold); margin-inline-start:2px; animation:blink 0.9s steps(1) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  #confess .sign{
+    font-family:'Aref Ruqaa',serif; font-size:23px; color:var(--gold); margin-top:30px; opacity:0;
+    transition:opacity 0.8s ease;
+  }
+  #confess .sign.show{ opacity:1; }
+
+  /* ================= REASONS ================= */
+  .reasons-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px; }
+  .reason-card{
+    background:var(--paper); border:1px solid rgba(194,28,91,0.16);
+    border-radius:14px; padding:24px 20px; box-shadow:0 14px 30px -20px rgba(74,33,48,0.28);
+  }
+  .reason-glyph{
+    width:38px; height:38px; border-radius:50%; background:var(--bg-alt); color:var(--wine);
+    display:flex; align-items:center; justify-content:center; font-size:17px; margin-bottom:14px;
+  }
+  .reason-card h3{ font-size:18px; color:var(--wine-deep); margin-bottom:8px; }
+  .reason-card p{ font-size:13.5px; color:var(--muted); }
+  .reason-card:nth-child(3n) .reason-glyph{ background:var(--wine); color:var(--paper); }
+  .reason-card:nth-child(3n) h3{ color:var(--gold); }
+
+  /* ================= GAME ================= */
+  .quiz-item{ background:var(--paper); border:1px solid rgba(194,28,91,0.16); border-radius:14px; padding:22px; margin-bottom:16px; }
+  .quiz-q{ font-weight:700; margin-bottom:14px; font-size:15.5px; }
+  .quiz-opts{ display:flex; flex-wrap:wrap; gap:10px; }
+  .quiz-opts button{
+    font-family:'Tajawal',sans-serif; font-size:13.5px; background:var(--bg-alt); border:1px solid transparent;
+    color:var(--ink); padding:9px 16px; border-radius:20px; cursor:pointer; transition:all 0.2s ease;
+  }
+  .quiz-opts button:hover{ border-color:var(--wine); }
+  .quiz-opts button.picked{ background:var(--wine); color:var(--paper); }
+  .quiz-opts button:disabled{ cursor:default; opacity:0.55; }
+  .quiz-opts button.picked:disabled{ opacity:1; }
+  .quiz-response{ margin-top:12px; font-size:13.5px; color:var(--wine-deep); max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+  .quiz-response.show{ max-height:100px; }
+  #bonus{
+    text-align:center; padding:26px; border-radius:14px;
+    background:linear-gradient(160deg, var(--bg-alt), var(--bg));
+    opacity:0; max-height:0; overflow:hidden; transition:opacity 0.6s ease, max-height 0.6s ease, padding 0.6s ease;
+  }
+  #bonus.show{ opacity:1; max-height:200px; padding:26px; margin-top:8px; }
+  #bonus p{ font-family:'Aref Ruqaa',serif; font-size:19px; color:var(--wine-deep); }
+
+  /* ================= FINALE ================= */
+  #finale{
+    max-width:none; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 25% 25%, rgba(221,161,94,0.22), transparent 45%),
+      radial-gradient(circle at 80% 80%, rgba(194,28,91,0.22), transparent 45%),
+      var(--bg);
+  }
+  #finale > *{ position:relative; z-index:2; }
+  #finale h2{ font-size:clamp(28px,6vw,44px); color:var(--wine-deep); margin-bottom:14px; }
+  #finale p.lead{ color:var(--muted); font-size:15px; margin-bottom:36px; max-width:420px; }
+  #finalBtn{
+    position:relative; font-family:'Tajawal',sans-serif; font-size:17px; font-weight:800;
+    color:var(--paper); background:linear-gradient(135deg, var(--wine), var(--wine-deep)); border:none;
+    padding:16px 44px; border-radius:32px; cursor:pointer; box-shadow:0 14px 30px -12px rgba(142,18,69,0.55);
+    transition:transform 0.25s ease, opacity 0.5s ease;
+  }
+  #finalBtn:hover{ transform:translateY(-2px); }
+  #finalBtn:focus-visible{ outline:3px solid var(--gold); outline-offset:4px; }
+  #finalBtn.hidden{ opacity:0; pointer-events:none; }
+  #finalMsg{ margin-top:32px; max-width:480px; opacity:0; transform:translateY(10px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  #finalMsg.show{ opacity:1; transform:translateY(0); }
+  #finalMsg p{ font-size:16px; line-height:2.1; color:var(--ink); }
+  #finalMsg .sign{ font-family:'Aref Ruqaa',serif; font-size:25px; color:var(--wine-deep); margin-top:18px; }
+
+  .heart-burst{ position:absolute; top:50%; left:50%; font-size:19px; color:var(--wine); pointer-events:none; animation: burst 1.4s ease-out forwards; }
+  @keyframes burst{
+    0%{ transform:translate(-50%,-50%) scale(0.4); opacity:1; }
+    100%{ transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1); opacity:0; }
+  }
+
+  .page-signature{
+    text-align:center; padding:50px 20px 10px; position:relative;
+  }
+  .page-signature .sig-line{
+    font-family:'Tajawal',sans-serif; font-size:13px; color:var(--muted); letter-spacing:1px;
+    margin-bottom:2px;
+  }
+  .page-signature .sig-name{
+    font-family:'Aref Ruqaa', serif; font-weight:700; font-size:clamp(34px, 8vw, 50px);
+    color:var(--wine-deep); display:inline-block; transform:rotate(-4deg);
+    text-shadow:0 2px 10px rgba(142,18,69,0.18);
+  }
+
+  footer{ text-align:center; padding:16px 20px 60px; color:#B98A96; font-size:12.5px; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ transition:none; opacity:1; transform:none; }
+    .scroll-cue{ animation:none; }
+    .heart-burst{ animation:none; display:none; }
+    .floater{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<nav id="dotnav" aria-label="التنقل بين الأقسام">
+  <button data-target="hero" aria-label="البداية"></button>
+  <button data-target="story" aria-label="قصتنا"></button>
+  <button data-target="notes" aria-label="جوابات مريم"></button>
+  <button data-target="confess" aria-label="اعترافات"></button>
+  <button data-target="reasons" aria-label="ليه بعشقك"></button>
+  <button data-target="game" aria-label="لعبة بينا"></button>
+  <button data-target="finale" aria-label="الختام"></button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="floaters" id="heroFloaters"></div>
+  <div class="eyebrow">صفحة مكتوبة بإيدي، ملهاش وجود غير عندك 💗</div>
+  <h1>يا مريم</h1>
+  <div class="hero-sub">يا مريومتي.. يا نور عيني.. يا أكمل واحدة في الدنيا ✨️</div>
+  <p class="lead-text">قبل ما تقفلي الصفحة، خدي بالك إن كل كلمة جواها حقيقية اوي، وكل حرف فيها بيتكلم عن بنت شخصيتها متكاملة ومفيش منها اتنين. انزلي تحت بهدوء وعيشيها معايا، وهتعرفي بجد قد إيه بحبك 🫂</p>
+  <div class="scroll-cue">
+    انزلي تحت
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m0 0l-6-6m6 6l6-6"/></svg>
+  </div>
+</section>
+
+<!-- ================= STORY / TIMELINE ================= -->
+<section id="story">
+  <div class="reveal">
+    <div class="divider">♥ ♥ ♥</div>
+    <div class="section-label">قصتنا</div>
+    <h2 class="section-title">من أول ما بقينا احنا الاتنين</h2>
+    <p class="section-intro">دوسي على أي جملة عشان تفتحي اللي جواها يا كتكوتي 🐣</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <button class="tl-head" data-tl="0">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">البداية</div>
+        <div class="tl-title">أول مرة اتكلمنا</div>
+      </button>
+      <div class="tl-body">من أول كلمتين حسيت إن في حاجة مختلفة، مكنش حب عادي، كان حاجة غريبة أوي إنها تحصل بسرعة كده 🌚</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="1">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">بعدها بشوية</div>
+        <div class="tl-title">أول ضحكة سوا</div>
+      </button>
+      <div class="tl-body">لسه فاكر أول ضحكة حقيقية ضحكتيها قدامي، ومن ساعتها بقيت بدور عليها في كل كلمة بقولهالك 🤭</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="2">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">وبعدين</div>
+        <div class="tl-title">لما حسيت إنك بيتي</div>
+      </button>
+      <div class="tl-body">مش عارف امتى بالظبط، بس فجأة حسيت إني مبقتش محتاج حد غيرك عشان أرتاح 💗</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="3">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">أول خناقة</div>
+        <div class="tl-title">ورجعنا لبعض أقوى</div>
+      </button>
+      <div class="tl-body">مكنش سهل، بس خرجنا منها متعلمين إزاي نتعامل مع بعض أحسن، وده خلاني أحبك أكتر مش أقل.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="4">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">بعد كده</div>
+        <div class="tl-title">لما بقيتي أول حد أكلمه الصبح</div>
+      </button>
+      <div class="tl-body">قبل ما أشوف موبايلي، قبل أي حاجة، إنتي أول حاجة بفكر فيها ✨️</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="5">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">مع الوقت</div>
+        <div class="tl-title">لما بدأت أحفظ كل تفاصيلك</div>
+      </button>
+      <div class="tl-body">لونك اللي بتحبيه، أكلتك المفضلة، صوتك وانتي زعلانة، حتى نبرة صوتك وانتي بتضحكي.. كله محفور جوايا.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="6">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">فترة صعبة</div>
+        <div class="tl-title">لما كنتي متعبة وحاولت أطمنك</div>
+      </button>
+      <div class="tl-body">مكنتش عايز أعمل حاجة تانية غير إني أكون جنبك، حتى لو مش قادر أغير الموقف، عايزك تحسي إنك مش لوحدك 🫂</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="7">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">دلوقتي</div>
+        <div class="tl-title">إحنا الاتنين قريبين من بعض بجد</div>
+      </button>
+      <div class="tl-body">مش عايز نرجع لحاجة راحت، عايز نكمل اللي إحنا فيه، لأنه أحلى حاجة حصلتلي في حياتي 💞</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="8">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">حاليًا</div>
+        <div class="tl-title">لما بقينا نفهم بعض من غير كلام</div>
+      </button>
+      <div class="tl-body">نظرة واحدة بتقولي كفاية، وأنا كمان بقيت أعرف لما يكون فيه حاجة تضايقك من غير ما تقوليها.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="9">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">كل يوم</div>
+        <div class="tl-title">بحبك أكتر من امبارح</div>
+      </button>
+      <div class="tl-body">مش كلام كبير بقوله، ده حقيقي، كل يوم بلاقي سبب جديد أحبك بيه أكتر من اللي قبله.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="10">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">النهارده</div>
+        <div class="tl-title">وأنا هنا، ثابت جنبك</div>
+      </button>
+      <div class="tl-body">مهما حصل، إنتي مش هتفضلي لوحدك في أي حاجة، صعبة كانت أو حلوة.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="11">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">وبكرة</div>
+        <div class="tl-title">لسه في حاجات كتير قدامنا</div>
+      </button>
+      <div class="tl-body">عايز نعدي كل حاجة سوا، الصعب والسهل، وعايزك تبقي متأكدة إني هفضل هنا 🖐🏻</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="12">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">زي كل مرة</div>
+        <div class="tl-title">لما بدافع عنك قدام أي حد</div>
+      </button>
+      <div class="tl-body">مش هسكت أبدًا لو حسيت إن حد بيقلل منك، إنتي تستاهلي احترام كامل مني ومن أي حد حواليكي.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="13">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">أوقات كتير</div>
+        <div class="tl-title">لما بنضحك على حاجة تافهة لمدة ساعة</div>
+      </button>
+      <div class="tl-body">أبسط اللحظات بينا بتبقى من أحلى ذكرياتي، وده حاجة نادرة بجد ألاقيها مع حد.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="14">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">الفترة دي</div>
+        <div class="tl-title">لما بقيتي أهم خبر في يومي</div>
+      </button>
+      <div class="tl-body">أي حاجة حلوة تحصلي، بتيجي في بالي أقولهالك أول واحدة، حتى لو يومي مشغول أوي.</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="15">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">دايمًا</div>
+        <div class="tl-title">لما بدأت أفكر في المستقبل بجد</div>
+      </button>
+      <div class="tl-body">مش بس بحلم، بخطط بجد، وإنتي حاضرة في كل خطة بفكر فيها 💗</div>
+    </div>
+
+    <div class="tl-item">
+      <button class="tl-head" data-tl="16">
+        <span class="tl-plus">+</span>
+        <div class="tl-year">وكل ما بشوفك أكتر</div>
+        <div class="tl-title">بتأكدلي إنك شخصية متكاملة</div>
+      </button>
+      <div class="tl-body">مش بس حبيبتي، إنتي بنت شخصيتها كاملة من كل النواحي، ومفيش منها اتنين في الدنيا، وأنا محظوظ إني اتقابلت بيكي.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NOTE JAR ================= -->
+<section id="notes" class="section-alt">
+  <div class="inner">
+    <div class="reveal">
+      <div class="divider">♥ ♥ ♥</div>
+      <div class="section-label">جوابات مريم</div>
+      <h2 class="section-title">116 ورقة صغيرة ليكي إنتي بس</h2>
+      <p class="section-intro">كل ورقة فيها حاجة حقيقية بحس بيها، وكل حرف فيها بيقولك إنك أكمل واحدة في حياتي. دوسي على أي واحدة تفتحيها يا روحي 💗</p>
+    </div>
+
+    <div class="jar-grid" id="jarGrid"></div>
+
+    <button class="shuffle-btn reveal" id="shuffleBtn">افتحيلي واحدة عشوائية 👀</button>
+  </div>
+</section>
+
+<!-- ================= CONFESSIONS ================= -->
+<section id="confess">
+  <div class="floaters" id="confessFloaters"></div>
+  <div class="inner">
+    <div class="section-label reveal">اعترافات</div>
+    <h2 class="section-title reveal">هقولك حاجة بجد بجد</h2>
+    <p id="confessText" class="reveal"></p>
+    <div class="sign" id="confessSign">بعشقك يا مريم، ومختارك من جديد كل يوم 💋</div>
+  </div>
+</section>
+
+<!-- ================= REASONS ================= -->
+<section id="reasons">
+  <div class="reveal">
+    <div class="divider">♥ ♥ ♥</div>
+    <div class="section-label">ليه بعشقك كل يوم أكتر</div>
+    <h2 class="section-title">25 حاجة حقيقية عني وعنك</h2>
+    <p class="section-intro">مش وعود فاضية، ده اللي فعلاً حاسسه ناحيتك يا مراتي.. وده جزء بسيط بس من قد إيه إنتي شخصية مكتملة مفيش تانية زيها 🫵🏻</p>
+  </div>
+
+  <div class="reasons-grid reveal">
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتفهميني من غير كلام</h3>
+      <p>نظرة واحدة منك بتقولي كل حاجة، وده حاجة نادرة بجد.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بترتاحلك بجد</h3>
+      <p>معاكي بحس إني مش لازم أكون حد تاني، بكون أنا وبس.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>ضحكتك بتنسيني همي</h3>
+      <p>مهما كان يومي تقيل، صوت ضحكتك بيصلحه في ثانية.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتقفي جنبي</h3>
+      <p>حتى لما بغلط، بتقفي معايا مش عليا.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بفتخر بيكي قدام الدنيا</h3>
+      <p>يا مريومتي، إنتي أحلى حاجة حصلتلي وعايز الكل يعرف كده.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>بتفتكري تفاصيلي</h3>
+      <p>حاجات صغيرة نسيتها أنا، إنتي فاكراها. ده بيخليني حاسس إني مهم.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>عندك قلب كبير أوي</h3>
+      <p>بتحسي بالناس اللي حواليكي أكتر ما بتحسي بنفسك أحيانًا.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتصدقيني</h3>
+      <p>ثقتك فيا مسؤولية بحملها بجد، ومش هفرط فيها.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>مبقتش أستحمل بعدك</h3>
+      <p>يوم واحد من غير صوتك حاسسه طويل أوي.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتشيليني وقت التعب</h3>
+      <p>من غير ما تقولي حاجة، بس وجودك كفاية يهدي بالي.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>عيونك بتقول كل حاجة</h3>
+      <p>بعرف مزاجك من نظرة واحدة، وده حاجة بحبها فيكي أوي.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>إنتي قراري مش غلطتي</h3>
+      <p>اخترتك وواعي تمامًا إني هفضل مختارك كل يوم من جديد.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتاخدي رأيي بجد</h3>
+      <p>مش بس بتسمعيني، بتقدري كلامي وده بيخليني أحس إني موجود فعلاً.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتفرحي بفرحي أنا</h3>
+      <p>لما ينجحلي حاجة، فرحتك بيها بتبقى أكبر من فرحتي أحيانًا.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>عندك حس فكاهة يجننني</h3>
+      <p>بتضحكيني في لحظات مش متوقعة خالص، وده بيريحني جدًا.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتحافظي على اللي بينا</h3>
+      <p>حتى وقت الزعل، بحس إنك بتحاولي تحافظي على العلاقة مش تهدميها.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتقولي رأيك بصراحة</h3>
+      <p>مبتخبيش عني حاجة، وده حاجة بحترمها فيكي أوي.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>بتشجعيني في حلمي</h3>
+      <p>مش بس بتسمعي أحلامي، بتصدقي إني أقدر أوصلها.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتلاحظي لما بتعب</h3>
+      <p>حتى لو مقولتش حاجة، بتحسي بيا وبتسأليني إيه اللي مضايقني.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتخليني عايز أكون أحسن</h3>
+      <p>مش عشان أرضيكي بس، عشان أستاهلك فعلاً.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>بتذكريني بربنا</h3>
+      <p>طيبتك وقلبك بيفكروني إن ربنا اختارلي حد كويس بجد.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بتسامحيني بسهولة</h3>
+      <p>مش عشان بتستهيني بنفسك، عشان قلبك كبير بجد.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>بحس إنك حظي</h3>
+      <p>مش كل حد بيتقابل بحد يفهمه وهو ساكت، وأنا اتقابلت بيكي.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">💋</div>
+      <h3>بتخليني أطمن على المستقبل</h3>
+      <p>معاكي بحس إن أي حاجة ممكن تتحل، طول ما إحنا سوا.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-glyph">♡</div>
+      <h3>إنتي شخصية متكاملة، مفيش منها اتنين</h3>
+      <p>دورت وشفت كتير، بس محدش زيك خالص، إنتي نسخة واحدة يا مريم، ومحدش هيقدر يبقى بديل ليكي أبدًا.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GAME ================= -->
+<section id="game" class="section-alt">
+  <div class="inner">
+    <div class="reveal">
+      <div class="divider">♥ ♥ ♥</div>
+      <div class="section-label">لعبة صغيرة بينا</div>
+      <h2 class="section-title">جاوبي بصراحة يا كوتي</h2>
+      <p class="section-intro">مفيش إجابة غلط هنا، جاوبي زي ما حاسة بالظبط 🤭</p>
+    </div>
+
+    <div class="reveal" id="quizWrap"></div>
+
+    <div id="bonus" class="reveal">
+      <p>خلصتي كل الأسئلة 🥹 وده حاسسني إنك لسه قاعدة تسمعيني لحد هنا.. تسلميلي يا حياتي 💗</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINALE ================= -->
+<section id="finale">
+  <div class="floaters" id="finaleFloaters"></div>
+  <div class="reveal">
+    <h2>وصلنا لآخر الصفحة يا روحي</h2>
+    <p class="lead">فضل حاجة واحدة بس عايزك تسمعيها مني دلوقتي، وهي أهم حاجة في الصفحة كلها.</p>
+    <button id="finalBtn">دوسي هنا يا حياتي 💗</button>
+    <div id="finalMsg">
+      <p>إنتي مش بس حبيبتي، إنتي روح قلبي وعقلي وكل حاجة حلوة في يومي. إنتي البنت اللي شخصيتها متكاملة، ومفيش منها اتنين في الدنيا كلها. مش عايز أرجع لحاجة، عايز أكمل معاكي وبس، وأطمنك كل يوم إني هنا وهفضل هنا مهما حصل. بعشقك يا مريومتي أكتر بكتير من أي كلام هقدر أقوله، وهفضل كل يوم بحبك أكتر من اللي فات 💗</p>
+      <div class="sign">وعمري كله ليكي، بعشقك مش بحبك وخلاص 💋</div>
+    </div>
+  </div>
+</section>
+
+<div class="page-signature reveal">
+  <div class="sig-line">من زوجك</div>
+  <div class="sig-name">مؤمن ♡</div>
+</div>
+
+<footer>كتبتهم بحب عشانك يا مريومتي، ومفيش حد شافها غيرك🫂♥️</footer>
+
+<script>
+/* ---------- progress bar ---------- */
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = h.scrollTop;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (scrolled / max) * 100 : 0;
+  progress.style.width = pct + '%';
+}
+document.addEventListener('scroll', updateProgress, { passive:true });
+updateProgress();
+
+/* ---------- dot nav ---------- */
+const dotButtons = Array.from(document.querySelectorAll('#dotnav button'));
+const sectionIds = dotButtons.map(b => b.dataset.target);
+const sections = sectionIds.map(id => document.getElementById(id));
+
+dotButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    if(target) target.scrollIntoView({ behavior:'smooth' });
+  });
+});
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const idx = sections.indexOf(entry.target);
+    if(idx === -1) return;
+    if(entry.isIntersecting){
+      dotButtons.forEach(b => b.classList.remove('active'));
+      dotButtons[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => { if(s) navObserver.observe(s); });
+
+/* ---------- reveal on scroll ---------- */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ---------- ambient floating emojis ---------- */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const floaterEmojis = ['💗','✨️','🥹','💞','♥️','🐣'];
+function spawnFloaters(containerId, count){
+  if(prefersReducedMotion) return;
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  for(let i = 0; i < count; i++){
+    const span = document.createElement('span');
+    span.className = 'floater';
+    span.textContent = floaterEmojis[Math.floor(Math.random() * floaterEmojis.length)];
+    span.style.left = (5 + Math.random() * 90) + '%';
+    span.style.setProperty('--drift', (Math.random() * 60 - 30) + 'px');
+    span.style.animationDuration = (12 + Math.random() * 10) + 's';
+    span.style.animationDelay = (Math.random() * 12) + 's';
+    span.style.fontSize = (16 + Math.random() * 14) + 'px';
+    container.appendChild(span);
+  }
+}
+spawnFloaters('heroFloaters', 9);
+spawnFloaters('confessFloaters', 7);
+spawnFloaters('finaleFloaters', 9);
+
+/* ---------- timeline accordion ---------- */
+document.querySelectorAll('.tl-head').forEach(head => {
+  head.addEventListener('click', () => {
+    const item = head.closest('.tl-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.tl-item.open').forEach(i => i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ---------- note jar ---------- */
+/* CUSTOMIZE: عدّلي/زودي الرسايل دي براحتك، كل سطر ورقة لوحدها */
+const notes = [
+  "أول ما بشوف اسمك عالشاشة، بيبقى أحلى جزء في يومي 💗",
+  "لسه فاكر أول ضحكة حقيقية ضحكتيها قدامي 🤭",
+  "مش بنساكي وأنا مشغول، بفتكرك حتى وسط الزحمة.",
+  "مبقدرش أفتكر نفسي من غيرك بشكل طبيعي خالص.",
+  "بحبك مش عشان الأوقات الحلوة بس، عشان قد إيه إنتي حقيقية معايا.",
+  "كل خناقة بينا علمتني حاجة عنك وعن نفسي.",
+  "صوتك وقت التعب بيهدي حاجة جوايا مش قادر أوصفها.",
+  "عايز أكون أول حد تفتكريه في أي خبر حلو ✨️",
+  "مبسوط إنك موجودة في حياتي، في كل الأحوال.",
+  "بجد وحشتيني، حتى لو شفتك امبارح بس 🥹",
+  "نفسي نكمل زي ما إحنا، بس أقرب كل يوم.",
+  "إنتي مش بس حبيبتي، إنتي أمان بالنسبالي.",
+  "فخور بيكي في كل حاجة، حتى لما بتحسي إنك مش قد كده.",
+  "معاكي بحس إني مش لازم أكون مثالي، بس أكون حقيقي.",
+  "لو سألتيني ليه بحبك، الإجابة بسيطة: عشان إنتي إنتي.",
+  "في تفكيري فيكي، مش بس بحبك، بحترمك أوي كمان.",
+  "إنتي مش امتحان لازم تعدّيه، إنتي بيتي اللي بارتاح فيه.",
+  "وحشني ضحكنا سوا، ونفسي نضحك أكتر وأكتر.",
+  "يا كوتي، إنتي أحلى حاجة حصلتلي في حياتي كلها.",
+  "لما بتبقي زعلانة، بحس إن نص الدنيا واقفة معاكي.",
+  "كل مرة أشوفك فيها، حاسس إني بحبك من الأول تاني 🌚",
+  "مريومتي، إنتي مش خيار، إنتي قرار بعمله كل يوم من جديد.",
+  "بجننني إزاي إنتي حلوة كده من غير ما تحاولي.",
+  "لو الدنيا زعلتك، أنا هفضل هنا لحد ما ترجعلك ضحكتك.",
+  "نور عيني، بجد مفيش يوم بمر من غير ما أفكر فيكي.",
+  "إنتي السبب إني بقيت أحب الصبح، عشان بيبدأ بيكي.",
+  "زوجتي في قلبي قبل ما تبقي زوجتي في ورق 💍",
+  "روحي، حاسس إن جزء مني عايش جواكي.",
+  "عيوني، بحبك أكتر ما بقدر أوصف بالكلام.",
+  "عقلي مشغول بيكي أكتر ما بيتخيل حد.",
+  "روح قلبي، معاكي بحس إني كامل مش ناقص حاجة.",
+  "مراتي، ده اللقب اللي بحبه أكتر من أي حاجة.",
+  "كتكوتي، بجد بحس إني عايز أحميكي من كل حاجة تضايقك.",
+  "لو حسيتي إني بعيد شوية، صدقيني قلبي معاكي دايمًا 🫂",
+  "بحلم إن كل يوم جاي يبقى أحلى من اللي فات.",
+  "إنتي مش مجرد حبيبتي، إنتي أهم قرار في حياتي.",
+  "لما بتضحكي بجد، الدنيا كلها بتبقى أحلى قدامي.",
+  "مبحبش المبالغة، بس معاكي كل كلمة بقولها حقيقية.",
+  "يا مريم، إنتي حظي اللي مش هفرط فيه أبدًا.",
+  "كل تفصيلة فيكي، بحبها، حتى اللي إنتي مش واخده بالك منها.",
+  "بحس إن الله رزقني بيكي، مش بس حبيتك.",
+  "معاكي بطّلت أخاف من المستقبل، لأني عارف إنك جنبي.",
+  "أنا وإنتي، دايمًا، مهما حصل بينا.",
+  "بحب الطريقة اللي بتضحكي بيها من قلبك.",
+  "صوتك وانتي متحمسة بيبقى أحلى صوت في الدنيا 💗",
+  "بحب عنادك، حتى لما بيضايقني شوية.",
+  "بتفرحيني بأصغر حاجة، وده نادر.",
+  "مهما زعلتي، برجع أهدي بسرعة عشانك.",
+  "حاسس إن ربنا حاطط بركة في وجودك في حياتي.",
+  "مش بحب حد يزعلك، حتى لو الزعل مش مني.",
+  "لما بتتكلمي وانتي فرحانة، بحس بفرحتك زي فرحتي.",
+  "عايز أشوفك ناجحة ومبسوطة في كل حاجة تحلمي بيها.",
+  "أي خبر يضايقك، حاسس إنه بيضايقني بنفس القد.",
+  "بجد مفيش حد فهمني زيك.",
+  "حتى في صمتك، بحس إنك معايا.",
+  "بتخليني أحسن نسخة من نفسي.",
+  "عمري ما هزهق منك، ده حاجة أنا متأكد منها.",
+  "بحس إن كل يوم بيني وبينك بييجي أحسن من اللي قبله.",
+  "مريومتي، إنتي أول حد أفكر أشاركه أي حاجة حلوة تحصلي.",
+  "مبقتش أقدر أتخيل حياتي من غيرك.",
+  "عارف إنك أقوى بكتير من أي موقف تعباكي.",
+  "بجد فخور بمجهودك، حتى لو النتيجة مش زي ما نفسك فيها.",
+  "إنتي مش لازم تكوني مثالية عشان أحبك، إنتي كفاية زي ما إنتي.",
+  "كل مرة أفتكر إزاي اتقابلنا، بضحك من جوايا.",
+  "بحب لما بتزعلي وبعدين تضحكي فجأة من حاجة تافهة.",
+  "حياتي، إنتي مش عبء على حد، إنتي هدية.",
+  "بحلم بمستقبل إنتي فيه، مش لأني بحلم بس، لأني متأكد.",
+  "لما بتحضنيني، بحس إن كل همومي بتقل.",
+  "مش بنسى تفاصيلك، حتى الصغيرة اللي إنتي نفسك بتنسيها.",
+  "روحي، إنتي مش اختيار وقتي، إنتي اختيار قلبي.",
+  "عايزك تعرفي إنك مش وحدك في أي حاجة، حتى الصعبة.",
+  "بجد مبسوط إنك جزء من كل تفصيلة في يومي.",
+  "كل ما أشوف حاجة حلوة، أول حد بفكر فيه إنتي.",
+  "مريومتي، ثقتك فيا أغلى حاجة عندي.",
+  "حتى لما نختلف، بحبك برغم كل حاجة.",
+  "نور عيني، إنتي السبب إني بقيت أحسن.",
+  "مش عايز أوعدك بالمستحيل، عايز أوعدك بإني هفضل حقيقي معاكي.",
+  "بحس إنك بيتي، مهما كان مكاني فين.",
+  "مفيش يوم بيعدي من غير ما اشكر ربنا عليكي.",
+  "عقلي مشغول بيكي أكتر ما تتخيلي بكتير.",
+  "كتكوتي، بحميكي حتى من نفسك لما تكوني قاسية على نفسك.",
+  "إنتي مش هتفهمي قد إيه بحبك، لغاية ما تحسيه بنفسك كل يوم.",
+  "كل خطوة بينا بتخليني متأكد أكتر إنك القرار الصح.",
+  "لو حد سألني عن أحلى حاجة عندي، جوابي هيبقى إنتي.",
+  "بحب إني أبقى أول حد يهنيكي بأي حاجة حلوة.",
+  "مراتي، الكلمة دي بحس بيها جوايا قبل ما أقولها.",
+  "عيوني، بحبك بجنون، مش بحب عادي.",
+  "إنتي مش مجرد اسم في تليفوني، إنتي بيت كامل.",
+  "لسه هفضل أتعلم فيكي حاجات جديدة كل يوم.",
+  "حتى وانتي زعلانة، بشوفك أحلى بنت في الدنيا.",
+  "بحب إني أبقى أول حد يطمنك لما تخافي.",
+  "روح قلبي، وجودك بس كفاية يهدي بالي.",
+  "عايزك تحسي إنك محبوبة مش بس مطلوبة.",
+  "مش بس بحبك، بحترم كل قرار تاخديه.",
+  "تصدقي إني بفتكرك في أوقات مش متوقعة خالص.",
+  "بحس إن اللي بينا أنضج من أي علاقة تانية شوفتها.",
+  "مهما كبرنا، عايز نفضل بنفس الحماس ده.",
+  "بحب لما تدلعيني برغم إنك مش بتحبي تعترفي بده 🌚",
+  "إنتي مش امتحان في حياتي، إنتي الجايزة.",
+  "كل يوم بنعديه سوا، بحس إني اكسبت حاجة.",
+  "عيوني، حتى صوتك وانتي نعسانة بحبه.",
+  "بحب فضولك، وبحب كمان لما تسأليني نفس السؤال مرتين.",
+  "حياتي، إنتي مش خطة ب، إنتي الخطة الوحيدة.",
+  "بجد مش هقصر معاكي، حتى لو تعبت أنا.",
+  "مريومتي، إنتي السبب إني بقيت أحب الاستقرار.",
+  "عارف إنك بتخافي أحيانًا، وأنا هفضل أطمنك لحد ما تصدقي.",
+  "كل تفصيلة فيكي، حتى العنيدة، بحبها.",
+  "مبسوط إن آخر صورة في بالي كل ليلة تكون إنتي.",
+  "معاكي بحس إن الوقت بيمر بسرعة، وده حاجة مش بتحصلي مع أي حد.",
+  "شخصيتك متكاملة يا مريم، مفيش فيها نقص ولا محتاجة حد يكملها.",
+  "دورت في كل اللي حواليا، ومحدش زيك خالص، إنتي نسخة واحدة بس.",
+  "كل يوم بتأكدلي إني مش هلاقي حد تاني يفهمني ويحبني زيك.",
+  "أنا مش بحبك بس، أنا بعشقك، وده حاجة مختلفة تمامًا.",
+  "لو خيروني بين الدنيا كلها وبينك، هختارك إنتي من غير تفكير.",
+  "إنتي أحلى قرار اخدته في حياتي، ومفيش يوم هندم عليه.",
+  "آخر ورقة يا حياتي: بحبك، بعشقك، وهفضل مختارك كل يوم من جديد 💋"
+];
+
+const jarGrid = document.getElementById('jarGrid');
+notes.forEach((text, idx) => {
+  const card = document.createElement('div');
+  card.className = 'note-card';
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', 'افتحي الرسالة رقم ' + (idx + 1));
+  card.innerHTML =
+    '<div class="face front">ورقة ' + (idx + 1) + '<br>افتحيني 🌚</div>' +
+    '<div class="face back">' + text + '</div>';
+  const flip = () => card.classList.add('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flip(); }
+  });
+  jarGrid.appendChild(card);
+});
+
+document.getElementById('shuffleBtn').addEventListener('click', () => {
+  const cards = Array.from(jarGrid.children).filter(c => !c.classList.contains('flipped'));
+  if(cards.length === 0) return;
+  const pick = cards[Math.floor(Math.random() * cards.length)];
+  pick.classList.add('flipped');
+  pick.scrollIntoView({ behavior:'smooth', block:'center' });
+});
+
+/* ---------- confessions typewriter ---------- */
+/* CUSTOMIZE: غيّري نص الاعتراف ده لو عايز تكتب كلامك بنفسك */
+const confessMessage = "يا مريم، هقولك حاجة بصراحة: أنا بجد بدمنك. مش بحس إني بحبك وخلاص، بحس إني معتاد على وجودك زي ما بتعودي على أي حاجة أساسية في يومك. صوتك أول ما أصحى، وآخر حاجة بسمعها قبل ما أنام. وعايزك تعرفي حاجة كمان: احنا اتفرقنا فترة، وأنا عارف قد إيه الفترة دي كانت صعبة، بس ولا يوم فيها نسيت قد إيه إنتي بنت شخصيتها متكاملة ومفيش منها اتنين. ولما رجعنا لبعض حسيت إني رجعت لنفسي، مش بس ليكي. ومن يومها وأنا متأكد أكتر من أي وقت فات إنك القرار الصح، ومفيش مشكلة تانية هتفرقنا، لأن اللي بينا دلوقتي أنضج وأقوى بكتير. مش عايز حاجة تتغير بينا، عايز بس تعرفي إن اللي بحسه ناحيتك مش عادي خالص، وإني كل يوم بلاقي نفسي معجب بيكي أكتر من اللي فات، وعاشق فيكي حاجات ما كنتش واخد بالي إني ممكن أحبها بالشكل ده.";
+
+let confessStarted = false;
+function typeWriter(el, text, speed, onDone){
+  let i = 0;
+  el.textContent = '';
+  function step(){
+    if(i < text.length){
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(step, speed);
+    } else if(onDone){
+      onDone();
+    }
+  }
+  step();
+}
+
+const confessObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting && !confessStarted){
+      confessStarted = true;
+      const el = document.getElementById('confessText');
+      typeWriter(el, confessMessage, 24, () => {
+        document.getElementById('confessSign').classList.add('show');
+      });
+      confessObserver.disconnect();
+    }
+  });
+}, { threshold: 0.4 });
+confessObserver.observe(document.getElementById('confess'));
+
+/* ---------- quiz ---------- */
+/* CUSTOMIZE: عدّلي الأسئلة والاختيارات والردود زي ما يعبّر عنكم */
+const quizData = [
+  {
+    q: "إيه اللي بيطمنك إني بحبك؟",
+    opts: [
+      { label: "كلامي اليومي معاكي", resp: "هفضل أقولهولك كل يوم من غير ملل 💗" },
+      { label: "اهتمامي بتفاصيلك", resp: "هفضل أفتكر كل حاجة صغيرة فيكي." },
+      { label: "وقوفي جنبك وقت التعب", resp: "هفضل جنبك، بجد، في كل الأحوال 🫂" }
+    ]
+  },
+  {
+    q: "لو حسيتي إني مشغول شوية، عايزاني أعمل إيه؟",
+    opts: [
+      { label: "تطمنيني إنك موجودة", resp: "وهطمنك أنا كمان إن بالي معاكي حتى وأنا مشغول." },
+      { label: "أبعتلك رسالة صغيرة", resp: "من دلوقتي هبقى أبعتلك من غير مناسبة ✨️" },
+      { label: "نتكلم بهدوء بعدها", resp: "مستعد نتكلم أي وقت تحسي إنك محتاجاه." }
+    ]
+  },
+  {
+    q: "إيه اللي بيفرحك في يوم عادي؟",
+    opts: [
+      { label: "مكالمة فجأة", resp: "هبقى أعمل كده أكتر، عشان أسمع صوتك 🌚" },
+      { label: "حد يسأل عليكي بجد", resp: "أنا بسأل عليكي، مش عشان أسأل، عشان مهتم." },
+      { label: "شوية هدوء وراحة بالي", resp: "هحاول ماكونش سبب في ضغطك أبدًا." }
+    ]
+  },
+  {
+    q: "في أوقات التعب، محتاجة إيه أكتر مني؟",
+    opts: [
+      { label: "حد يسمعني من غير حكم", resp: "أنا هنا أسمع، من غير ما أحاسبك على حاجة." },
+      { label: "حد يطمني إني مش لوحدي", resp: "مش لوحدك، مهما حصل، أنا هنا 💞" },
+      { label: "مساحة لحالي شوية", resp: "خديها وأنا مستني، من غير ما أزعل." }
+    ]
+  },
+  {
+    q: "إيه أكتر حاجة بتحسيني بيها لما بقولها؟",
+    opts: [
+      { label: "بحبك", resp: "بقولهالك وهفضل أقولهالك لحد ما تملي منها 💗" },
+      { label: "وحشتيني", resp: "بجد بجد، وحشتيني حتى لو شفتك دلوقتي." },
+      { label: "أنا فخور بيكي", resp: "دايمًا، قدامك وقدام أي حد." }
+    ]
+  },
+  {
+    q: "إيه اللي بيخليكي مطمنة في علاقة؟",
+    opts: [
+      { label: "الصدق حتى لو موجع", resp: "هفضل صادق معاكي، حتى لو الصدق تقيل أحيانًا." },
+      { label: "الثبات مش الكلام الكبير", resp: "مش عايز أوعدك بكلام، عايز أثبت بالأفعال." },
+      { label: "إنك تحسي إنك أولوية", resp: "إنتي أولوية، وهفضل أوريكي ده مش بس أقوله." }
+    ]
+  },
+  {
+    q: "لو زعلتي مني حتى لو حاجة بسيطة، عايزاني أعمل إيه؟",
+    opts: [
+      { label: "أسمعك الأول", resp: "تمام، هحاول أسمع أكتر وأتكلم أقل." },
+      { label: "أعتذر بجد من غير أعذار", resp: "اعتذار حقيقي، مش بس كلمتين وخلاص." },
+      { label: "أديكي وقتك", resp: "من غير ضغط، هستنى لحد ما تكوني جاهزة." }
+    ]
+  },
+  {
+    q: "إيه اللي بيخلي يومك أحلى؟",
+    opts: [
+      { label: "ضحكة صغيرة معاك", resp: "هفضل أدور على أي سبب أضحكك بيه 🤭" },
+      { label: "حد يفتكر تفاصيلك", resp: "بفتكر كل حاجة فيكي، حتى الصغيرة." },
+      { label: "حضن بس", resp: "متاح في أي وقت، بس اطلبيه 🫂" }
+    ]
+  },
+  {
+    q: "إيه اللي عايزاه من علاقتنا في المرحلة الجاية؟",
+    opts: [
+      { label: "نقرب أكتر", resp: "ده بالظبط اللي حابب أوصله معاكي." },
+      { label: "نفهم بعض أعمق", resp: "أنا معاكي في ده، خطوة خطوة." },
+      { label: "استقرار وطمأنينة", resp: "هفضل أبني ده معاكي كل يوم." }
+    ]
+  },
+  {
+    q: "إيه اللي بيخليكي حاسة إنك محبوبة؟",
+    opts: [
+      { label: "لما بسمعك", resp: "دايمًا هسمعك، حتى لو مش هعرف أحل المشكلة." },
+      { label: "لما بحس بيكي", resp: "حسك عندي أولوية، مش تفصيلة صغيرة." },
+      { label: "لما بحميكي", resp: "هفضل أعملها، حتى لو من نفسك أحيانًا 🖐🏻" }
+    ]
+  },
+  {
+    q: "لو حسيتي بالملل، عايزة إيه مني؟",
+    opts: [
+      { label: "مفاجأة صغيرة", resp: "هحب أعمل كده أكتر، حتى من غير مناسبة ✨️" },
+      { label: "نخرج سوا", resp: "متاح في أي وقت، بس اطلبي." },
+      { label: "نتكلم بس", resp: "أحلى وقت بيبقى وقت الكلام البسيط ده." }
+    ]
+  },
+  {
+    q: "إيه اللي بيضحكك أكتر لما أعمله؟",
+    opts: [
+      { label: "أقلد حد قدامك", resp: "هفضل أعملها عشان أشوف ضحكتك." },
+      { label: "أقول حاجة غلط ونضحك عليها", resp: "من أحلى لحظاتنا فعلاً." },
+      { label: "أدلعك بصوت غريب", resp: "حتى لو غريب، طول ما بيضحكك يبقى يستاهل 🤭" }
+    ]
+  },
+  {
+    q: "لو غلطت، عايزة أعتذر إزاي؟",
+    opts: [
+      { label: "بالكلام المباشر", resp: "مفيش أحسن من إني أقولها زي ما هي." },
+      { label: "بحاجة بسيطة تفرحك", resp: "هحب أعملها بعد الاعتذار مش بدالها." },
+      { label: "بوقت أوعى فيه أكتر", resp: "هاخد بالي أكتر عشان ما تتكررش." }
+    ]
+  },
+  {
+    q: "إيه اللي يخليكي فخورة إنك معايا؟",
+    opts: [
+      { label: "احترامي لرأيك", resp: "هفضل أسمعك واحترم كلامك دايمًا." },
+      { label: "وقوفي جنبك", resp: "في كل الأحوال، هفضل واقف جنبك." },
+      { label: "التزامي بيكي", resp: "التزامي مش كلام، ده قرار متجدد كل يوم." }
+    ]
+  },
+  {
+    q: "لو حسيتي بالخوف من المستقبل، أقولك إيه؟",
+    opts: [
+      { label: "إحنا هنعديها سوا", resp: "مهما كانت صعبة، هنعديها إحنا الاتنين." },
+      { label: "أنا هنا ولو الدنيا وقفت", resp: "مش هروح، مهما حصل." },
+      { label: "خدي وقتك، مش لوحدك", resp: "خدي كل الوقت اللي محتاجاه، أنا مستني." }
+    ]
+  }
+];
+
+const quizWrap = document.getElementById('quizWrap');
+let answeredCount = 0;
+const totalQuestions = quizData.length;
+
+quizData.forEach((item) => {
+  const box = document.createElement('div');
+  box.className = 'quiz-item';
+
+  const qEl = document.createElement('div');
+  qEl.className = 'quiz-q';
+  qEl.textContent = item.q;
+  box.appendChild(qEl);
+
+  const optsEl = document.createElement('div');
+  optsEl.className = 'quiz-opts';
+
+  const respEl = document.createElement('div');
+  respEl.className = 'quiz-response';
+
+  item.opts.forEach(opt => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = opt.label;
+    b.addEventListener('click', () => {
+      if(box.dataset.answered === 'true') return;
+      box.dataset.answered = 'true';
+      b.classList.add('picked');
+      Array.from(optsEl.children).forEach(other => { other.disabled = true; });
+      respEl.textContent = opt.resp;
+      respEl.classList.add('show');
+      answeredCount++;
+      if(answeredCount === totalQuestions){
+        document.getElementById('bonus').classList.add('show');
+      }
+    });
+    optsEl.appendChild(b);
+  });
+
+  box.appendChild(optsEl);
+  box.appendChild(respEl);
+  quizWrap.appendChild(box);
+});
+
+/* ---------- finale ---------- */
+const finalBtn = document.getElementById('finalBtn');
+const finalMsg = document.getElementById('finalMsg');
+const finaleSection = document.getElementById('finale');
+
+finalBtn.addEventListener('click', () => {
+  finalBtn.classList.add('hidden');
+  finalMsg.classList.add('show');
+
+  if(!prefersReducedMotion){
+    const rect = finalBtn.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2 + window.scrollY;
+    const hearts = ['♥','❤','♡','💗','💞'];
+    for(let i = 0; i < 24; i++){
+      const span = document.createElement('span');
+      span.className = 'heart-burst';
+      span.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 80 + Math.random() * 140;
+      span.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      span.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      span.style.left = originX + 'px';
+      span.style.top = originY + 'px';
+      span.style.position = 'absolute';
+      finaleSection.appendChild(span);
+      setTimeout(() => span.remove(), 1500);
+    }
+  }
+});
+</script>
+
+</body>
+</html>
